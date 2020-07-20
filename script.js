@@ -1,30 +1,31 @@
-var button = document.getElementById("enter");
-var input = document.getElementById("userinput");
-var ul = document.querySelector("ul");
+var input = document.querySelector("#userinput");
+var btn = document.querySelector("#enter");
+var list = document.querySelector("ul");
 
-function inputLength() {
+function inputLength(){
 	return input.value.length;
 }
 
-function createListElement() {
-	var li = document.createElement("li");
-	li.appendChild(document.createTextNode(input.value));
-	ul.appendChild(li);
+function addItem(){
+	var item = document.createElement("li");
+	item.appendChild(document.createTextNode(input.value));
+	list.appendChild(item);
 	input.value = "";
 }
 
-function addListAfterClick() {
-	if (inputLength() > 0) {
-		createListElement();
+function addItemButton(){
+	if(inputLength() > 0){
+		addItem();
+	 }
+}
+
+function addItemKeypress(e){
+	if(inputLength() > 0 && e.keyCode === 13){
+		addItem();
 	}
 }
 
-function addListAfterKeypress(event) {
-	if (inputLength() > 0 && event.keyCode === 13) {
-		createListElement();
-	}
-}
+btn.addEventListener("click", addItemButton);
+input.addEventListener("keypress", addItemKeypress);
 
-button.addEventListener("click", addListAfterClick);
 
-input.addEventListener("keypress", addListAfterKeypress);
