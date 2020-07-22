@@ -1,31 +1,58 @@
 var input = document.querySelector("#userinput");
 var btn = document.querySelector("#enter");
-var list = document.querySelector("ul");
+var ul = document.querySelector("ul");
+var item;
+var btn;
 
-function inputLength(){
+function inputValue(){
 	return input.value.length;
 }
 
+
 function addItem(){
-	var item = document.createElement("li");
+	item = document.createElement("li");
 	item.appendChild(document.createTextNode(input.value));
-	list.appendChild(item);
+	ul.appendChild(item);
 	input.value = "";
+
 }
 
-function addItemButton(){
-	if(inputLength() > 0){
-		addItem();
-	 }
+function deleteBtn(){
+	var delBtn = document.createElement("button");
+	delBtn.appendChild(document.createTextNode("delete"));
+	btn = document.querySelector("button");
+	item.appendChild(delBtn);
+	delBtn.addEventListener("click", function(){
+	item.remove();
+	})
+	btn.addEventListener("click", function(){
+		item.remove();
+	})
+	
 }
 
-function addItemKeypress(e){
-	if(inputLength() > 0 && e.keyCode === 13){
+
+function btnPress(){
+	if(inputValue() > 0){
 		addItem();
+		deleteBtn();
 	}
 }
 
-btn.addEventListener("click", addItemButton);
-input.addEventListener("keypress", addItemKeypress);
+function enterPress(e){
+	if(inputValue() > 0 && e.keyCode === 13){
+		addItem();
+		deleteBtn();
+	}
+}
 
+function checkItem(){
+item.addEventListener("click", function(){
+	item.classList.toggle("done");
+})
+}
+
+btn.addEventListener("click", btnPress);
+
+input.addEventListener("keypress", enterPress);
 
