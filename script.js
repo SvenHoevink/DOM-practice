@@ -5,23 +5,19 @@ let items = document.querySelectorAll(".item");
 
 let inputLength = () => input.value.length;
 
+let removeParent = (e) => {
+  e.target.parentNode.remove();
+};
+
 for (i = 0; i < items.length; i++) {
   let button = document.createElement("button");
   button.appendChild(document.createTextNode("delete"));
   items[i].appendChild(button);
 
-// items[i].addEventListener("click", () => {
-//   items[i].classList.toggle("done");
-// })
-
-button.addEventListener("click", (e) => {
-  e.target.parentNode.remove();
-})
+button.addEventListener("click", removeParent);
 }
 
-let removeParent = (e) => {
-  e.target.parentNode.remove();
-};
+
 
 ul.onclick = (e) => {
   e.target.classList.toggle("done");
